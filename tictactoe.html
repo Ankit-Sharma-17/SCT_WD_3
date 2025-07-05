@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Tic-Tac-Toe - Advanced Game Experience</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/4b8c3e6e8b.js" crossorigin="anonymous"></script>
+  <!-- Tic-Tac-Toe Specific Styles -->
+  <link rel="stylesheet" href="tictactoe.css">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+  <div class="w-full max-w-6xl mx-auto mt-4 px-4">
+    <!-- Professional Header -->
+    <div class="mb-8 text-center">
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl mb-6 shadow-lg">
+        <i class="fas fa-gamepad text-white text-xl"></i>
+        <span class="text-lg font-bold tracking-widest text-white" style="letter-spacing:2px;">TASK 03</span>
+      </div><br>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 header-accent">Advanced Tic-Tac-Toe</h1>
+      <p class="text-slate-300 text-lg max-w-2xl mx-auto">Strategic gameplay with AI opponents, multiple modes, and comprehensive statistics</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Game Panel -->
+      <div class="lg:col-span-2">
+        <div class="glass-card p-8 flex flex-col items-center mx-auto w-full animate-fadeInUp animated-border">
+          <!-- Game Controls -->
+          <div class="w-full flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+            <div class="flex items-center gap-3">
+              <button id="themeToggle" class="theme-btn flex items-center px-4 py-2 rounded-full shadow-lg font-semibold text-sm transition-all" title="Toggle theme">
+                <i class="fas fa-palette mr-2"></i>
+                <span>Theme</span>
+              </button>
+              <button id="settingsBtn" class="settings-btn flex items-center px-4 py-2 rounded-full shadow-lg font-semibold text-sm transition-all" title="Settings">
+                <i class="fas fa-cog mr-2"></i>
+                <span>Settings</span>
+              </button>
+            </div>
+            <div class="flex items-center gap-3">
+              <button id="darkModeToggle" class="dark-toggle-btn flex items-center px-5 py-2 rounded-full shadow-lg font-semibold text-base transition focus:outline-none" title="Toggle dark mode" aria-label="Toggle dark mode">
+                <span class="icon mr-2"><i class="fas fa-moon"></i></span>
+                <span class="toggle-text">Dark Mode</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Game Modes -->
+          <div class="w-full mb-6">
+            <div class="flex flex-wrap justify-center gap-3">
+              <button class="mode-btn active" data-mode="ai">
+                <i class="fas fa-robot mr-2"></i>vs AI
+              </button>
+              <button class="mode-btn" data-mode="player">
+                <i class="fas fa-users mr-2"></i>2 Players
+              </button>
+              <button class="mode-btn" data-mode="tournament">
+                <i class="fas fa-trophy mr-2"></i>Tournament
+              </button>
+              <button class="mode-btn" data-mode="puzzle">
+                <i class="fas fa-puzzle-piece mr-2"></i>Puzzle
+              </button>
+            </div>
+          </div>
+
+          <!-- Game Status -->
+          <div class="game-status-container mb-6">
+            <div class="game-status" id="gameStatus">Player X's Turn</div>
+            <div class="game-subtitle" id="gameSubtitle">AI Mode - Easy Difficulty</div>
+          </div>
+
+          <!-- Game Board -->
+          <div class="game-board-container mb-6">
+            <div class="game-board" id="board">
+              <div class="board-cell" data-cell="0"></div>
+              <div class="board-cell" data-cell="1"></div>
+              <div class="board-cell" data-cell="2"></div>
+              <div class="board-cell" data-cell="3"></div>
+              <div class="board-cell" data-cell="4"></div>
+              <div class="board-cell" data-cell="5"></div>
+              <div class="board-cell" data-cell="6"></div>
+              <div class="board-cell" data-cell="7"></div>
+              <div class="board-cell" data-cell="8"></div>
+            </div>
+          </div>
+
+          <!-- Game Controls -->
+          <div class="flex flex-wrap justify-center gap-4 mb-6">
+            <button class="control-btn primary" id="newGameBtn">
+              <i class="fas fa-plus mr-2"></i>New Game
+            </button>
+            <button class="control-btn warning" id="resetBtn">
+              <i class="fas fa-undo mr-2"></i>Reset
+            </button>
+            <button class="control-btn info" id="undoBtn">
+              <i class="fas fa-arrow-left mr-2"></i>Undo
+            </button>
+            <button class="control-btn success" id="saveBtn">
+              <i class="fas fa-save mr-2"></i>Save
+            </button>
+          </div>
+
+          <!-- Navigation -->
+          <div class="flex justify-between items-center mt-8 w-full max-w-md mx-auto animated-nav">
+            <a href="stopwatch.html" class="nav-btn prev">
+              <i class="fas fa-arrow-left mr-2"></i>Stopwatch
+            </a>
+            <a href="todo.html" class="nav-btn next">
+              Todo App<i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Panel -->
+      <div class="lg:col-span-1">
+        <!-- Player Info -->
+        <div class="glass-card p-6 mb-6">
+          <h3 class="text-xl font-bold text-white mb-4">Players</h3>
+          <div class="player-info">
+            <div class="player-card active" id="playerX">
+              <div class="player-icon">
+                <i class="fas fa-times"></i>
+              </div>
+              <div class="player-details">
+                <div class="player-name">Player X</div>
+                <div class="player-score" id="scoreX">0</div>
+                <ul class="player-wins" id="playerXWins"></ul>
+              </div>
+            </div>
+            <div class="player-card" id="playerO">
+              <div class="player-icon">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="player-details">
+                <div class="player-name">Player O</div>
+                <div class="player-score" id="scoreO">0</div>
+                <ul class="player-wins" id="playerOWins"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="glass-card p-6 mb-6">
+          <h3 class="text-xl font-bold text-white mb-4">Statistics</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
+              <div class="stat-content">
+                <div class="stat-value" id="totalGames">0</div>
+                <div class="stat-label">Total Games</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+              <div class="stat-content">
+                <div class="stat-value" id="winRate">0%</div>
+                <div class="stat-label">Win Rate</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-clock"></i></div>
+              <div class="stat-content">
+                <div class="stat-value" id="avgTime">0s</div>
+                <div class="stat-label">Avg Time</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-fire"></i></div>
+              <div class="stat-content">
+                <div class="stat-value" id="streak">0</div>
+                <div class="stat-label">Win Streak</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game History -->
+        <div class="glass-card p-6">
+          <div class="history-header">
+            <h3 class="text-xl font-bold text-white">Recent Games</h3>
+            <button class="clear-history-btn" id="clearHistoryBtn">
+              <i class="fas fa-trash mr-1"></i>Clear
+            </button>
+          </div>
+          <div class="game-history" id="gameHistory"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Game Settings</h3>
+          <button class="modal-close" id="closeSettings">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label>AI Difficulty</label>
+            <select id="aiDifficulty">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+              <option value="impossible">Impossible</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label>Player X Symbol</label>
+            <select id="playerXSymbol">
+              <option value="X" selected>X</option>
+              <option value="O">O</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label>Sound Effects</label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="soundEffects" checked>
+              <span class="slider"></span>
+            </div>
+          </div>
+          <div class="setting-group">
+            <label>Animations</label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="animations" checked>
+              <span class="slider"></span>
+            </div>
+          </div>
+          <div class="setting-group">
+            <label>Auto-save Games</label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="autoSave" checked>
+              <span class="slider"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="tictactoe.js"></script>
+</body>
+</html> 
